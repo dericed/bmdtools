@@ -388,7 +388,7 @@ int main(int argc, char *argv[])
     int camera     = 0;
     char *filename = NULL;
 
-    while ((ch = getopt(argc, argv, "?hs:f:a:m:n:F:C:O:b:p:S:")) != -1) {
+    while ((ch = getopt(argc, argv, "?hf:m:C:O:b:p:S:")) != -1) {
         switch (ch) {
         case 'p':
             switch (atoi(optarg)) {
