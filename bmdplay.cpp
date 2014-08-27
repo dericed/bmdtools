@@ -365,7 +365,7 @@ int usage(int status)
 
     fprintf(
         stderr,
-        "    -f <filename>        Filename raw video will be written to\n"
+        "    -f <filename>        Filename of input video\n"
         "    -C <num>             Device number to be used\n"
         "    -b <num>             Milliseconds of pre-buffering before playback (default = 2000 ms)\n"
         "    -p <pixel>           PixelFormat Depth (8 or 10 - default is 8)\n"
@@ -373,8 +373,8 @@ int usage(int status)
         "    -O <output>          Output connection:\n"
         "                         1: Composite video + analog audio\n"
         "                         2: Components video + analog audio\n"
-        "                         3: HDMI video + audio\n"
-        "                         4: SDI video + audio\n\n");
+        "                         3: HDMI video + HDMI audio\n"
+        "                         4: SDI video + SDI audio\n\n");
 
     return status;
 }
