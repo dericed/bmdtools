@@ -271,13 +271,13 @@ void print_output_modes(IDeckLink *deckLink)
     if (result != S_OK) {
         fprintf(
             stderr,
-            "Could not obtain the video output display mode iterator - result = %08x\n",
+            "Could not obtain the video display mode iterator - result = %08x\n",
             result);
         goto bail;
     }
 
-    // List all supported output display modes
-    printf("Supported video output display modes and pixel formats:\n");
+    // List all supported display modes
+    printf("Supported video display modes:\n");
     while (displayModeIterator->Next(&displayMode) == S_OK) {
         BMDProbeString str;
 
