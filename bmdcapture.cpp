@@ -583,7 +583,7 @@ int usage(int status)
             "    -m <mode id>:\n"
             );
 
-    // Create an IDeckLinkIterator object to enumerate all DeckLink cards in the system
+    // Create an IDeckLinkIterator object to enumerate all DeckLink devices in the system
     deckLinkIterator = CreateDeckLinkIteratorInstance();
     if (deckLinkIterator == NULL) {
         fprintf(
@@ -592,16 +592,16 @@ int usage(int status)
         return 1;
     }
 
-    // Enumerate all cards in this system
+    // Enumerate all devices in this system
     while (deckLinkIterator->Next(&deckLink) == S_OK) {
         BMDProbeString str;
-        // Increment the total number of DeckLink cards found
+        // Increment the total number of DeckLink devices found
         numDevices++;
         if (numDevices > 1) {
             printf("\n\n");
         }
 
-        // *** Print the model name of the DeckLink card
+        // *** Print the model name of the DeckLink device
         result = deckLink->GetModelName(&str);
         if (result == S_OK) {
             printf("-> %s (-C %d )\n\n",
@@ -616,7 +616,7 @@ int usage(int status)
     }
     deckLinkIterator->Release();
 
-    // If no DeckLink cards were found in the system, inform the user
+    // If no DeckLink devices were found in the system, inform the user
     if (numDevices == 0) {
         printf("No Blackmagic Design devices were found.\n");
     }
@@ -626,7 +626,7 @@ int usage(int status)
  *  if (displayModeIterator)
  *  {
  *      // we try to print out some useful information about the chosen
- *      // card, but this only works if a card has been selected successfully
+ *      // device, but this only works if a device has been selected successfully
  *
  *      while (displayModeIterator->Next(&displayMode) == S_OK)
  *      {
@@ -658,7 +658,7 @@ int usage(int status)
         "    -p <pixel>           PixelFormat Depth (8 or 10 - default is 8)\n"
         "    -n <frames>          Number of frames to capture (default is unlimited)\n"
         "    -M <memlimit>        Maximum queue size in GB (default is 1 GB)\n"
-        "    -C <num>             number of card to be used\n"
+        "    -C <num>             number of device to be used\n"
         "    -S <serial_device>   data input serial\n"
         "    -A <audio-in>        Audio input:\n"
         "                         1: Analog (RCA or XLR)\n"
@@ -817,7 +817,7 @@ int main(int argc, char *argv[])
     while (i++ < camera);
 
     if (result != S_OK) {
-        fprintf(stderr, "No DeckLink PCI cards found.\n");
+        fprintf(stderr, "No DeckLink devices found.\n");
         goto bail;
     }
 
@@ -938,7 +938,7 @@ int main(int argc, char *argv[])
     if (result != S_OK) {
         fprintf(stderr,
                 "Failed to enable video input. Is another application using "
-                "the card?\n");
+                "the device?\n");
         goto bail;
     }
 
@@ -948,7 +948,7 @@ int main(int argc, char *argv[])
     if (result != S_OK) {
         fprintf(stderr,
                 "Failed to enable audio input. Is another application using "
-                "the card?\n");
+                "the device?\n");
         goto bail;
     }
 

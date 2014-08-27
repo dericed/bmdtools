@@ -325,7 +325,7 @@ int usage(int status)
             "    -m <mode id>:\n"
             );
 
-    // Create an IDeckLinkIterator object to enumerate all DeckLink cards in the system
+    // Create an IDeckLinkIterator object to enumerate all DeckLink devices in the system
     deckLinkIterator = CreateDeckLinkIteratorInstance();
     if (deckLinkIterator == NULL) {
         fprintf(
@@ -334,16 +334,16 @@ int usage(int status)
         return 1;
     }
 
-    // Enumerate all cards in this system
+    // Enumerate all devices in this system
     while (deckLinkIterator->Next(&deckLink) == S_OK) {
         BMDProbeString str;
 
-        // Increment the total number of DeckLink cards found
+        // Increment the total number of DeckLink devices found
         numDevices++;
         if (numDevices > 1)
             printf("\n\n");
 
-        // *** Print the model name of the DeckLink card
+        // *** Print the model name of the DeckLink device
         result = deckLink->GetModelName(&str);
         if (result == S_OK) {
             printf("-> %s (-C %d )\n\n",
@@ -358,7 +358,7 @@ int usage(int status)
     }
     deckLinkIterator->Release();
 
-    // If no DeckLink cards were found in the system, inform the user
+    // If no DeckLink devices were found in the system, inform the user
     if (numDevices == 0)
         printf("No Blackmagic Design devices were found.\n");
     printf("\n");
@@ -366,7 +366,7 @@ int usage(int status)
     fprintf(
         stderr,
         "    -f <filename>        Filename raw video will be written to\n"
-        "    -C <num>             Card number to be used\n"
+        "    -C <num>             Device number to be used\n"
         "    -b <num>             Milliseconds of pre-buffering before playback (default = 2000 ms)\n"
         "    -p <pixel>           PixelFormat Depth (8 or 10 - default is 8)\n"
         "    -S <port>            Serial device (i.e: /dev/ttyS0, /dev/ttyUSB0)\n"
@@ -532,7 +532,7 @@ bool Player::Init(int videomode, int connection, int camera)
     while (i++ < camera);
 
     if (result != S_OK) {
-        fprintf(stderr, "No DeckLink PCI cards found\n");
+        fprintf(stderr, "No DeckLink devices found\n");
         goto bail;
     }
 
@@ -621,7 +621,7 @@ bail:
 
 IDeckLinkDisplayMode *Player::GetDisplayModeByIndex(int selectedIndex)
 {
-    // Populate the display mode combo with a list of display modes supported by the installed DeckLink card
+    // Populate the display mode combo with a list of display modes supported by the installed DeckLink device
     IDeckLinkDisplayModeIterator *displayModeIterator;
     IDeckLinkDisplayMode *deckLinkDisplayMode;
     IDeckLinkDisplayMode *selectedMode = NULL;
